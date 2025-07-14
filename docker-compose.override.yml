@@ -1,6 +1,6 @@
 services:
   messagebroker:
-    container_name: ordering-messagebroker
+    container_name: worker-messagebroker
     #hostname: messagebroker
     environment:
       - RABBITMQ_DEFAULT_USER=guest
@@ -17,9 +17,9 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-  ordering.db:
-    hostname: ordering-db
-    container_name: ordering-db
+  worker.db:
+    hostname: worker-db
+    container_name: worker-db
     # deploy:
     #   resources:
     #     limits:
@@ -42,20 +42,20 @@ services:
     volumes:
       - sql-data:/var/opt/mssql
 
-  ordering.api:
-    container_name: ordering-api
+  worker.api:
+    container_name: worker-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Database=Server=ordering.db;Database=FastTechFoods;User Id=sa;Password=TC5HackathonFIAP;Encrypt=False;TrustServerCertificate=True
+      - ConnectionStrings__Database=Server=worker.db;Database=FastTechFoods;User Id=sa;Password=TC5HackathonFIAP;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=messagebroker
       - MessageBroker__UserName=guest
       - MessageBroker__Password=guest
     depends_on:
       messagebroker:
         condition: service_healthy
-      # ordering.db:
+      # worker.db:
       #   condition: service_healthy
     ports:
       - "6003:8080"

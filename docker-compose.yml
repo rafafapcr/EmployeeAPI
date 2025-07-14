@@ -2,11 +2,11 @@ services:
   messagebroker:
     image: rabbitmq:management-alpine
 
-  ordering.db:
+  worker.db:
     image: mcr.microsoft.com/mssql/server:2022-latest
 
-  ordering.api:
-    image: ${DOCKER_REGISTRY-}orderingapi
+  worker.api:
+    image: ${DOCKER_REGISTRY-}workerapi
     build:
       context: .
-      dockerfile: src/Ordering.API/Dockerfile
+      dockerfile: src/Worker.API/Dockerfile
