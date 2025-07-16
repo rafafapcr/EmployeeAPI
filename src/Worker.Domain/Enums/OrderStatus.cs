@@ -1,9 +1,7 @@
-﻿namespace Worker.Domain.Enums;
-
-public enum OrderStatus
+﻿public enum Position
 {
-    Pending,
-    Processing,
-    Completed,
-    Canceled,
+    Manager = 1,
+    Developer = 2,
+    Analyst = 3,
+    // Adicione outros cargos conforme necessário
 }

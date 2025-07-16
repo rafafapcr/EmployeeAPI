@@ -1,3 +1,3 @@
 ﻿namespace Worker.Application.Workers.DTOs;
 
-public sealed record PositonDto(Guid ProductId, int Quantity, decimal Price);
+public sealed record PositonDto(Guid PositionId, string Description);

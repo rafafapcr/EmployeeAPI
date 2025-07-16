@@ -2,4 +2,4 @@
 
 namespace Worker.Application.Common.Messaging.Events;
 
-public record WorkerCreatedEvent(Order order) : IntegrationEvent;
+public record WorkerCreatedEvent(Employee Employee) : IntegrationEvent;

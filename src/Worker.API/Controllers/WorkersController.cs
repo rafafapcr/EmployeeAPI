@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Worker.Application.Workers.Commands.CreateOrder;
+using Worker.Application.Workers.Commands.CreateWorker;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
 namespace Worker.API.Controllers

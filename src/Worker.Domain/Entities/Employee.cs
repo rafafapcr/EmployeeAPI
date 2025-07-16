@@ -1,58 +1,65 @@
 ﻿using Worker.Domain.Abstractions;
-using Worker.Domain.Enums;
-using Worker.Domain.Events;
-using Worker.Domain.ValueObjects;
 
 namespace Worker.Domain.Entities
 {
-    public class Order : Aggregate<OrderId>
+    public class Employee : Entity<Guid>
     {
-        private readonly List<OrderItem> _orderItems = new();
-        public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
-        public CustomerId CustomerId { get; private set; } = default!;
-        public OrderStatus Status { get; private set; } = OrderStatus.Pending;
-        public decimal TotalPrice
+        public string Name { get; private set; } = string.Empty;
+        public int Registration { get; private set; }
+        public string Email { get; private set; } = string.Empty;
+        public string Password { get; private set; } = string.Empty;
+        public Guid PositionId { get; private set; }
+        public bool Active { get; private set; }
+
+        // EF Core parameterless constructor
+        private Employee() { }
+
+        private Employee(
+            string name,
+            int registration,
+            string email,
+            string password,
+            Guid positionId,
+            bool active)
         {
-            get => OrderItems.Sum(x => x.Price * x.Quantity);
-            private set { }
+            Id = Guid.NewGuid();
+            Name = name;
+            Registration = registration;
+            Email = email;
+            Password = password;
+            PositionId = positionId;
+            Active = active;
         }
 
-        public static Order Create(OrderId id, CustomerId customerId)
+        public static Employee Create(
+            string name,
+            int registration,
+            string email,
+            string password,
+            Guid positionId,
+            bool active = true)
         {
-            var order = new Order
-            {
-                Id = id,
-                CustomerId = customerId,
-                Status = OrderStatus.Pending
-            };
-
-            order.AddDomainEvent(new OrderCreatedEvent(order));
-
-            return order;
+            return new Employee(name, registration, email, password, positionId, active);
         }
 
-        public void Update(OrderStatus status)
-        {
-            Status = status;
+        public void Activate() => Active = true;
+        public void Deactivate() => Active = false;
 
-            AddDomainEvent(new OrderUpdatedEvent(this));
+        public void ChangePosition(Guid newPositionId)
+        {
+            PositionId = newPositionId;
         }
 
-        public void Add(ProductId productId, int quantity, decimal price)
+        public void ChangePassword(string newPassword)
         {
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
-
-            _orderItems.Add(new OrderItem(Id, productId, quantity, price));
+            Password = newPassword;
         }
 
-        public void Remove(ProductId productId)
+        public void UpdateInfo(string name, int registration, string email)
         {
-            var orderItem = _orderItems.FirstOrDefault(x => x.ProductId == productId);
-            if (orderItem is not null)
-            {
-                _orderItems.Remove(orderItem);
-            }
+            Name = name;
+            Registration = registration;
+            Email = email;
         }
     }
 }

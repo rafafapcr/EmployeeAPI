@@ -10,7 +10,7 @@ public class WorkerAcceptedEventHandler(ISender sender, ILogger<WorkerAcceptedEv
 {
     public async Task Handle(WorkerAcceptedEvent @event)
     {
-        logger.LogInformation("Worker {EmployeeId} was accepted by Kitchen.", @event.order.Id);
+        logger.LogInformation("Worker {EmployeeId} was accepted by Kitchen.", @event.Employee.Id);
 
         // update order status to Accepted
         //await sender.Send(new UpdateOrderStatusCommand(@event.order.Id, OrderStatus.Processing));

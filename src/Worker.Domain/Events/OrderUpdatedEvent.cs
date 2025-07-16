@@ -3,4 +3,4 @@ using Worker.Domain.Entities;
 
 namespace Worker.Domain.Events;
 
-public record OrderUpdatedEvent(Order order) : IDomainEvent;
+public record WorkerUpdatedEvent(Employee Employee) : IDomainEvent;
