@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Entities\Customer.cs" />
-    <Compile Remove="Entities\Order.cs" />
-    <Compile Remove="Entities\OrderItem.cs" />
-    <Compile Remove="Entities\Product.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 

@@ -8,6 +8,6 @@ public sealed record CreateWorkerCommand : IRequest<Guid>
     public int Registration { get; init; }
     public string Email { get; init; } = string.Empty;
     public string Password { get; init; } = string.Empty;
-    public Guid PositionId { get; init; }
+    public int PositionId { get; init; }
     public bool Active { get; init; }
 }

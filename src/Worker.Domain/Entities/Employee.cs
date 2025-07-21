@@ -8,7 +8,7 @@ namespace Worker.Domain.Entities
         public int Registration { get; private set; }
         public string Email { get; private set; } = string.Empty;
         public string Password { get; private set; } = string.Empty;
-        public Guid PositionId { get; private set; }
+        public int PositionId { get; private set; }
         public bool Active { get; private set; }
 
         // EF Core parameterless constructor
@@ -19,8 +19,9 @@ namespace Worker.Domain.Entities
             int registration,
             string email,
             string password,
-            Guid positionId,
+            int positionId,
             bool active)
+
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -36,7 +37,7 @@ namespace Worker.Domain.Entities
             int registration,
             string email,
             string password,
-            Guid positionId,
+            int positionId,
             bool active = true)
         {
             return new Employee(name, registration, email, password, positionId, active);
@@ -45,9 +46,9 @@ namespace Worker.Domain.Entities
         public void Activate() => Active = true;
         public void Deactivate() => Active = false;
 
-        public void ChangePosition(Guid newPositionId)
+        public void ChangePosition(int newPosition)
         {
-            PositionId = newPositionId;
+            PositionId = newPosition;
         }
 
         public void ChangePassword(string newPassword)

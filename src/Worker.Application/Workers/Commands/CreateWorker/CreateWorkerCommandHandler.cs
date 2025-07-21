@@ -21,8 +21,7 @@ public class CreateWorkerCommandHandler : IRequestHandler<CreateWorkerCommand, G
             command.Email,
             command.Password,
             command.PositionId,
-            command.Active
-        );
+            command.Active        );
 
         _context.Employees.Add(employee);
         await _context.SaveChangesAsync(cancellationToken);

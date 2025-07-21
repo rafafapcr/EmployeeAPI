@@ -8,7 +8,9 @@ namespace Worker.Infrastructure.Data;
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options) { }
+        : base(options)
+    {
+    }
 
     public DbSet<Employee> Employees => Set<Employee>();
 

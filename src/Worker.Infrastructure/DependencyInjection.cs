@@ -20,7 +20,10 @@ public static class DependencyInjection
         {
             // sp = service provider
             //options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString, sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure();
+            });
         });
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
