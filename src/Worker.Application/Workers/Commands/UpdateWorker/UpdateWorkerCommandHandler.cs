@@ -16,7 +16,7 @@ public class UpdateWorkerCommandHandler : IRequestHandler<UpdateWorkerCommand, b
         var employee = await _context.Employees.FindAsync(new object[] { request.Id }, cancellationToken);
         if (employee == null) return false;
 
-        employee.UpdateInfo(request.Name, employee.Registration, employee.Email);
+        employee.UpdateInfo(request.Name, employee.Registration, employee.Email, request.Active);
         employee.ChangePosition((int)request.Position);
 
         await _context.SaveChangesAsync(cancellationToken);

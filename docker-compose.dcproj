@@ -10,11 +10,15 @@
     <DockerServiceName>worker.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Worker.Infrastructure\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include="Worker.Infrastructure\Data\ApplicationDbContextFactory.cs" />
+    <None Include="tests\Worker.API.Tests\Workers\CreateWorkerCommandHandlerTests.cs" />
+    <None Include="tests\Worker.API.Tests\Workers\DeleteWorkerCommandHandlerTests.cs" />
   </ItemGroup>
 </Project>

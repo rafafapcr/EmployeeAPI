@@ -56,11 +56,12 @@ namespace Worker.Domain.Entities
             Password = newPassword;
         }
 
-        public void UpdateInfo(string name, int registration, string email)
+        public void UpdateInfo(string name, int registration, string email, bool active)
         {
             Name = name;
             Registration = registration;
             Email = email;
+            Active = active;
         }
     }
 }
